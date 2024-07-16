@@ -10,6 +10,16 @@ public class Block {
         this.data = data;
         this.prevousHash = prevousHash;
         this.timeStamp = System.currentTimeMillis();
+        this.hash = calculateHash();
+    }
 
+    // Calculate the hash of the block
+    public String calculateHash() {
+        String calculatedhash = StringUtil.applysha256(
+            prevousHash +
+            Long.toString(timeStamp) +
+            data
+        );
+        return calculatedhash;
     }
 }
