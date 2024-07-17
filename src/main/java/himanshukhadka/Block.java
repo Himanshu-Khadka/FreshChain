@@ -5,6 +5,7 @@ public class Block {
     public String prevousHash;
     private String data;
     private long timeStamp;
+    public int nonce;
 
     public Block(String data, String prevousHash) {
         this.data = data;
@@ -21,5 +22,14 @@ public class Block {
             data
         );
         return calculatedhash;
+    }
+
+    public void mineBlock(int difficulty){
+         String target = new String(new char[difficulty]).replace('\0', '0'); //Create a string with difficulty * "0"
+         while(!hash.substring( 0, difficulty).equals(target)){
+             nonce ++;
+             hash = calculateHash();
+         }
+            System.out.println("Block Mined!!! : " + hash);
     }
 }
